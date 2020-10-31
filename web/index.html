@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Subtool</title>
+	<meta name="description" content="Un mini outil pour faire du sous titrage de vidéos">
+	<meta name="author" content="Bigaston">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+	<link rel="stylesheet" href="/public/normalize.css">
+	<link rel="stylesheet" href="/public/skeleton.css">
+</head>
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="column">
+				<h1>Subtool</h1>
+				<p>Entrez votre texte ici, en mettant un retour à la ligne à chaque fois que vous voulez que ça change de sous titre (attention pas de saut de ligne)</p>
+				<textarea class="u-full-width" style="height: 400px" id="subtitle"></textarea>
+
+				<p>Choisissez votre vidéo</p>
+				<input type="file" id="file" /><br/>
+
+				<button onclick="startSync()" class="button-primary">Démarer la syncronisation</button><br/>
+
+				<video id="video" controls style="width: 100%;"></video>
+				<p id="currentSub"></p> 
+
+				<button onclick="startIn5()" class="button">Lancer la vidéo dans 5s</button>
+				<button onclick="sync()" class="button-primary">Chaine passée</button>
+			</div>
+		</div>
+	</div>
+
+	<script src="/public/index.js"></script>
+</body>
+</html>

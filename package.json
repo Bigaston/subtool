@@ -1,0 +1,22 @@
+{
+  "name": "subtool",
+  "version": "1.0.0",
+  "description": "Un mini outil pour faire des sous-titrages avec FFMPEG",
+  "main": "subtool.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bigaston/subtool.git"
+  },
+  "author": "Bigaston",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bigaston/subtool/issues"
+  },
+  "homepage": "https://github.com/Bigaston/subtool#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
