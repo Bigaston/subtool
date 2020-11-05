@@ -25,13 +25,16 @@
 				<p>Choisissez votre vidéo</p>
 				<input type="file" id="file" /><br/>
 
-				<button onclick="startSync()" class="button-primary">Démarer la syncronisation</button><br/>
+				<button onclick="startSync()" class="button-primary">Charger</button><br/>
 
-				<video id="video" controls style="width: 100%;"></video>
+				<audio id="audio" controls style="width: 100%; display: none;"></audio>
+				<video id="video" controls style="width: 100%; display: none;"></video>
 				<p id="currentSub"></p> 
 
-				<button onclick="startIn5()" class="button">Lancer la vidéo dans 5s</button>
-				<button onclick="sync()" class="button-primary">Chaine passée</button>
+				<div id="buttons" style="display: none;">
+					<button onclick="startIn5()" class="button">Lancer la vidéo dans 5s</button>
+					<button onclick="sync()" class="button-primary">Chaine passée</button>
+				</div>
 			</div>
 		</div>
 	</div>

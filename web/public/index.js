@@ -1,31 +1,46 @@
+// TODO faire un compteur à la mano en ML secondes. A chercher si pas autre manière
+
 let sub_tab_raw = [];
 let sub_tab = [];
 let current_sub = 0;
 
 let sub_element = document.getElementById("currentSub")
-let video = document.getElementById("video");
+let player;
 let last_sec = 0;
+let started_timestamp;
 
 function startSync() {
 	let subtitle = document.getElementById("subtitle");
 	sub_tab_raw = subtitle.value.split("\n");
 
 	var file = document.getElementById("file").files[0];
+	console.log(file)
+
+	if (file.type === "audio/mpeg") {
+		player = document.getElementById("audio");
+	} else {
+		player = document.getElementById("video")
+	}
+
+	player.style.display = "block";
+
 	var url = URL.createObjectURL(file);
-	console.log(url);
 	var reader = new FileReader();
 	reader.onload = function() {
-		video.src = url;
+		player.src = url;
 	}
 	reader.readAsDataURL(file);
 
 	sub_element.innerHTML = sub_tab_raw[0];
+	document.getElementById("buttons").style.display = "block";
 }
 
 function sync() {
+	let time = Date.now() - started_timestamp
+
 	let added_obj = {
 		start: toHMS(last_sec),
-		end: toHMS(video.currentTime),
+		end: toHMS(time),
 		text: sub_tab_raw[current_sub],
 		id: current_sub + 1
 	}
@@ -35,7 +50,7 @@ function sync() {
 	// Mise en place du prochain
 	if (sub_tab_raw[current_sub+1] != undefined) {
 		current_sub++;
-		last_sec = video.currentTime;
+		last_sec = time;
 		sub_element.innerHTML = sub_tab_raw[current_sub];
 	} else {
 		download();
@@ -52,7 +67,8 @@ function download() {
 		srt_string = srt_string + s.text + "\n\n";
 	})
 
-	downloadFile("sub_" + Date.now() + ".srt", srt_string);
+	var file = document.getElementById("file").files[0];
+	downloadFile("sub_" + file.name.split(".")[0] + ".srt", srt_string);
 }
 
 function downloadFile(filename, text) {
@@ -70,11 +86,14 @@ function downloadFile(filename, text) {
 
 function startIn5() {
 	setTimeout(() => {
-		video.play();
+		player.play();
+		started_timestamp = Date.now();
 	}, 5000	)
 }
 
-function toHMS(nbSec) {
+function toHMS(nbMs) {
+	nbSec = Math.trunc(nbMs/1000)
+
 	let sortie = {};
 	sortie.heure = Math.trunc(nbSec/3600);
 	if (sortie.heure < 10) {sortie.heure = "0"+sortie.heure}
@@ -87,6 +106,10 @@ function toHMS(nbSec) {
 	sortie.seconde = Math.trunc(nbSec);
 	if (sortie.seconde < 10) {sortie.seconde = "0"+sortie.seconde}
 
-	let sortie_chaine = sortie.heure + ":" + sortie.minute + ":" + sortie.seconde + ",000";
+	sortie.milliseconde = nbMs-(Math.trunc(nbMs/1000)*1000)
+	if (sortie.milliseconde < 10) {sortie.milliseconde = "00"+sortie.milliseconde}
+	else if (sortie.milliseconde < 100) {sortie.milliseconde = "0"+sortie.milliseconde}
+
+	let sortie_chaine = sortie.heure + ":" + sortie.minute + ":" + sortie.seconde + "," + sortie.milliseconde;
 	return sortie_chaine
 }
