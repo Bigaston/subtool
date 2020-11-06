@@ -1,5 +1,6 @@
 const express = require('express')
 const path = require("path");
+const open = require("open")
 
 const PORT = 3698
 
@@ -12,3 +13,4 @@ app.get("/", (req, res) => {
 })
 
 app.listen(PORT, () => console.log(`Serveur lancé sur ${PORT}`))
+open("http://localhost:" + PORT);
