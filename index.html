@@ -10,8 +10,8 @@
 
 	<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 
-	<link rel="stylesheet" href="/public/normalize.css">
-	<link rel="stylesheet" href="/public/skeleton.css">
+	<link rel="stylesheet" href="/normalize.css">
+	<link rel="stylesheet" href="/skeleton.css">
 </head>
 <body>
 
@@ -22,23 +22,27 @@
 				<p>Entrez votre texte ici, en mettant un retour à la ligne à chaque fois que vous voulez que ça change de sous titre (attention pas de saut de ligne)</p>
 				<textarea class="u-full-width" style="height: 400px" id="subtitle"></textarea>
 
-				<p>Choisissez votre vidéo</p>
+				<p>Choisissez votre média</p>
 				<input type="file" id="file" /><br/>
 
-				<button onclick="startSync()" class="button-primary">Charger</button><br/>
+				<button onclick="startSync()" class="button-primary">Charger un media</button><br/>
+
+				<p>Attention à ne pas mettre pause! Pour avoir une précision des sous titres en milisecondes j'ai du faire un bricollage et mettre en pause le média risque de tout casser</p>
 
 				<audio id="audio" controls style="width: 100%; display: none;"></audio>
 				<video id="video" controls style="width: 100%; display: none;"></video>
 				<p id="currentSub"></p> 
 
 				<div id="buttons" style="display: none;">
-					<button onclick="startIn5()" class="button">Lancer la vidéo dans 5s</button>
+					<button onclick="startIn5()" class="button">Lancer le media dans 5s</button>
 					<button onclick="sync()" class="button-primary">Chaine passée</button>
 				</div>
+
+				<p>Le fichier .str se téléchargera automatiquement quand vous aurez sous titré tout votre texte</p>
 			</div>
 		</div>
 	</div>
 
-	<script src="/public/index.js"></script>
+	<script src="/index.js"></script>
 </body>
 </html>
